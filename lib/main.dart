@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Portfolio',
       theme: ThemeData(
-          primarySwatch: Colors.purple,
-          canvasColor: Colors.purple.shade50,
+          primarySwatch: Colors.deepPurple,
+          canvasColor: Colors.deepPurpleAccent.shade700,
           useMaterial3: true,
           fontFamily: "poppins"
       ),

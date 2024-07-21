@@ -39,6 +39,9 @@ class _PortfolioState extends State<Portfolio> {
         child: Column(
           children: [
             Wrap(
+              spacing: 20,
+              runSpacing: 20,
+              alignment: WrapAlignment.center,
               children: [
                 About(),
                 Education()

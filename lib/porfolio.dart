@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lalitsahu/components/education.dart';
+import 'package:lalitsahu/components/footer.dart';
+import 'package:lalitsahu/components/skills.dart';
 
 import 'components/about.dart';
 
@@ -11,21 +13,33 @@ class Portfolio extends StatefulWidget {
 }
 
 class _PortfolioState extends State<Portfolio> {
-  List<Widget> navItems = [
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(onPressed: (){}, child: Text("Education")),
-    ),
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(onPressed: (){}, child: Text("Skills")),
-    ),
-  ];
+  List<Widget> navItems = [];
   bool isMobile = false;
+  final skillKey = GlobalKey();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    navItems = [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ElevatedButton(onPressed: (){}, child: Text("Education")),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ElevatedButton(onPressed: (){
+          Scrollable.ensureVisible(skillKey.currentContext!);
+        }, child: Text("Skills")),
+      ),
+    ];
+  }
   @override
   Widget build(BuildContext context) {
     isMobile = MediaQuery.of(context).size.width > 700 ? false : true;
     return Scaffold(
+      backgroundColor: Colors.purple.withOpacity(0.08)
+        ,
       appBar: AppBar(
         title: Text("Porfolio Website"),
         actions: isMobile ? null: navItems,
@@ -35,19 +49,25 @@ class _PortfolioState extends State<Portfolio> {
           children: navItems,
         ),
       ): null,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Wrap(
-              spacing: 20,
-              runSpacing: 20,
-              alignment: WrapAlignment.center,
-              children: [
-                About(),
-                Education()
-              ],
-            )
-          ],
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Wrap(
+                spacing: 20,
+                alignment: WrapAlignment.center,
+                children: [
+                  About(),
+                  Education()
+                ],
+              ),
+              Skills(
+                key: skillKey,
+              ),
+              Footer(),
+              SizedBox(height: 20,)
+            ],
+          ),
         ),
       )
     );

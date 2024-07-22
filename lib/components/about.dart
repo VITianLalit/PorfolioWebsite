@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lalitsahu/utility/animated_contact.dart';
+import 'package:lalitsahu/utility/socialrow.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class About extends StatefulWidget {
@@ -19,7 +21,9 @@ class _AboutState extends State<About> {
       margin: EdgeInsets.only(top: 20.0),
       width: MediaQuery.of(context).size.width < 900
           ? context.screenWidth * 0.9
-          : context.screenWidth * 0.3,
+          : context.screenWidth < 1600
+              ? context.screenWidth * 0.3
+              : context.screenWidth * 0.2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
         color: Colors.white,
@@ -42,6 +46,7 @@ class _AboutState extends State<About> {
             height: 12,
           ),
           Wrap(
+            alignment: WrapAlignment.center,
             spacing: 8.0,
             runSpacing: 8.0,
             children: [
@@ -49,59 +54,39 @@ class _AboutState extends State<About> {
                 label: Text("Flutter Developer"),
                 backgroundColor: Colors.green,
                 padding: EdgeInsets.all(8.0),
-                labelStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.white, fontSize: 14.0),
                 shape: StadiumBorder(), // No border specified
               ),
               Chip(
                 label: Text("App Developer"),
                 backgroundColor: Colors.green,
                 padding: EdgeInsets.all(8.0),
-                labelStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.white, fontSize: 14.0),
                 shape: StadiumBorder(), // No border specified
               )
             ],
           ),
           Divider(),
-          Container(
-            child: Row(
-              children: [
-                Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: FaIcon(FontAwesomeIcons.githubAlt, size: 20,),
-                  ),
-                ),
-                SizedBox(width: 12,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Github"),
-                    Text("Lalit's Portfolio"),
-                  ],
-                )
-              ],
-            ),
+          AnimatedContact(
+            iconData: FontAwesomeIcons.githubAlt,
+            title: "Github",
+            substitle: "Lalit's Portfolio",
+            onTap: (){},
           ),
-          Container(
-            child: Row(
-              children: [
-                Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: FaIcon(FontAwesomeIcons.githubAlt, size: 20,),
-                  ),
-                ),
-                SizedBox(width: 12,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Github"),
-                    Text("Lalit's Portfolio"),
-                  ],
-                )
-              ],
-            ),
-          )
+          AnimatedContact(
+            iconData: FontAwesomeIcons.gitlab,
+            title: "GitLab",
+            substitle: "Lalit's Portfolio",
+            onTap: (){},
+          ),
+
+          AnimatedContact(
+            iconData: FontAwesomeIcons.linkedin,
+            title: "LinkedIn",
+            substitle: "Lalit's Portfolio",
+            onTap: (){},
+          ),
+          SocialRow(),
         ],
       ),
     );
